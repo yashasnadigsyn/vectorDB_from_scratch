@@ -1,10 +1,9 @@
-import time
-
 import numpy as np
 
 from flat import BruteForceVectorDB
 from ivf import IVFIndex
 from ivf_optimized import IVFOptimized
+from no_dependency_ivf import IVFIndexPure
 
 SENTENCES = [
     "The king sat proudly on his throne.",
@@ -47,11 +46,20 @@ QUERIES = [
 #     print(f"Results: {results}")
 #     print("---")
 
-ivf_optimized_db = IVFOptimized()
-ivf_optimized_db.train(SENTENCES)
-ivf_optimized_db.add(SENTENCES)
+# ivf_optimized_db = IVFOptimized()
+# ivf_optimized_db.train(SENTENCES)
+# ivf_optimized_db.add(SENTENCES)
+# for query in QUERIES:
+#     results = ivf_optimized_db.search(query)
+#     print(f"Query: {query}")
+#     print(f"Results: {results}")
+#     print("---")
+
+ivf_pure_db = IVFIndexPure()
+ivf_pure_db.train(SENTENCES)
+ivf_pure_db.add(SENTENCES)
 for query in QUERIES:
-    results = ivf_optimized_db.search(query)
+    results = ivf_pure_db.search(query)
     print(f"Query: {query}")
     print(f"Results: {results}")
     print("---")

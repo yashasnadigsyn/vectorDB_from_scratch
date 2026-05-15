@@ -10,7 +10,7 @@ class KMeansPPIVF:
         self.max_iters = max_iters
         self.centroids = None
 
-    def _kmeans_plus_plus(self, vectors: np.ndarray):
+    def _kmeans_plus_plus(self, vectors: np):
         num_vectors = vectors.shape[0]
 
         first_idx = np.random.choice(num_vectors)
@@ -28,7 +28,7 @@ class KMeansPPIVF:
 
         return np.array(centroids)
 
-    def fit(self, vectors: np.ndarray):
+    def fit(self, vectors):
         num_vectors = vectors.shape[0]
 
         self.centroids = self._kmeans_plus_plus(vectors)
@@ -64,15 +64,15 @@ class IVFOptimized:
         self.inverted_index = {i: [] for i in range(num_clusters)}
         self.is_trained = False
         self.total_vectors = 0
-        self.sentences = []
         self.model = SentenceTransformer("Qwen/Qwen3-Embedding-0.6B")
 
-    def train(self, sentences: list[str]):
+    def train(self, sentences):
+        self.sentences = list(sentences)
         vectors = self.model.encode(sentences)
         self.kmeanspp_ivf.fit(vectors)
         self.is_trained = True
 
-    def add(self, sentences: list[str]):
+    def add(self, sentences):
         if not self.is_trained:
             raise ValueError("Index is not trained yet")
 
@@ -91,7 +91,7 @@ class IVFOptimized:
 
         self.total_vectors += len(vectors)
 
-    def search(self, query: str, top_k=2):
+    def search(self, query, top_k=2):
         if not self.is_trained:
             raise ValueError("Index is not trained yet")
 
