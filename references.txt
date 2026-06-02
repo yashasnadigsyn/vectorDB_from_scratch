@@ -1,0 +1,3 @@
+HNSW paper - https://arxiv.org/abs/1603.09320
+HNSW Video Explanation - https://www.youtube.com/watch?v=QvKMwLjdK-s
+Implementation of VectorDBs by someone else on GitHub - https://github.com/PeterP22/vector-db-from-scratch

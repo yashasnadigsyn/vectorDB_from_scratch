@@ -4,6 +4,8 @@ from flat import BruteForceVectorDB
 from ivf import IVFIndex
 from ivf_optimized import IVFOptimized
 from no_dependency_ivf import IVFIndexPure
+from nsw import NSW
+import nsw
 
 SENTENCES = [
     "The king sat proudly on his throne.",
@@ -55,11 +57,19 @@ QUERIES = [
 #     print(f"Results: {results}")
 #     print("---")
 
-ivf_pure_db = IVFIndexPure()
-ivf_pure_db.train(SENTENCES)
-ivf_pure_db.add(SENTENCES)
+# ivf_pure_db = IVFIndexPure()
+# ivf_pure_db.train(SENTENCES)
+# ivf_pure_db.add(SENTENCES)
+# for query in QUERIES:
+#     results = ivf_pure_db.search(query)
+#     print(f"Query: {query}")
+#     print(f"Results: {results}")
+#     print("---")
+
+nsw_db = NSW()
+nsw_db.insert(SENTENCES)
 for query in QUERIES:
-    results = ivf_pure_db.search(query)
+    results = nsw_db.search(query)
     print(f"Query: {query}")
     print(f"Results: {results}")
     print("---")
