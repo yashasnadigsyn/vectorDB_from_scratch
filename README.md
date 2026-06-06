@@ -1,6 +1,6 @@
-## VectorDB from Scratch
+## Vector Similarity Search Algorithms
 
-Trying to write and compare different vector database implementations from scratch
+Trying to write and compare different vector similarity search algorithms from scratch
 
 Currently implemented:
 - Flat search (Brute force)
