@@ -5,7 +5,8 @@ from ivf import IVFIndex
 from ivf_optimized import IVFOptimized
 from no_dependency_ivf import IVFIndexPure
 from nsw import NSW
-import nsw
+from hnsw_simple import HNSWSimple
+from hnsw_heuristic import HNSWHeuristic
 
 SENTENCES = [
     "The king sat proudly on his throne.",
@@ -66,10 +67,26 @@ QUERIES = [
 #     print(f"Results: {results}")
 #     print("---")
 
-nsw_db = NSW()
-nsw_db.insert(SENTENCES)
+# nsw_db = NSW()
+# nsw_db.insert(SENTENCES)
+# for query in QUERIES:
+#     results = nsw_db.search(query)
+#     print(f"Query: {query}")
+#     print(f"Results: {results}")
+#     print("---")
+    
+# hnsw_db = HNSWSimple()
+# hnsw_db.insert(SENTENCES)
+# for query in QUERIES:
+#     results = hnsw_db.search(query)
+#     print(f"Query: {query}")
+#     print(f"Results: {results}")
+#     print("---")
+    
+hnsw_heuristic_db = HNSWHeuristic()
+hnsw_heuristic_db.insert(SENTENCES)
 for query in QUERIES:
-    results = nsw_db.search(query)
+    results = hnsw_heuristic_db.search(query)
     print(f"Query: {query}")
     print(f"Results: {results}")
     print("---")
